@@ -1,33 +1,32 @@
 <template>
-
+  <div class="consentration-box">
+    <div v-for="n in trumps.length" 
+    :key="n"
+    class="trumpsShape">
+   </div>
+ </div>
 </template>
 
 <script>
 export default {
   data () {
     const mark = ['heart', 'dia', 'clover', 'spade']
-    const num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    const surface = ['true', 'false']
     const trumps = []
-      for (let i = mark.length -1 ; i > 0; i--) {
-        for (let l = num.length -1 ; l > 0; l--) {
-          const k = Math.floor(Math.random() * (i + 1))
-          const markRandom = mark[i]
-          mark[i] = mark[k]
-          mark[k] = markRandom
-          console.log(mark)
-          // trumps.push(mark[k])
-      
-          const m = Math.floor(Math.random() * (l + 1))
-          const numRandom = num[l]
-          num[l] = num[m]
-          num[m] = numRandom
-          
-        console.log(num)
-        // trumps.push(num)
+    console.log(trumps)
+      for (let i = 0; i < 4; i++) {
+        for (let k = 1; k <= 13; k++) {
+        trumps.push({trumpMark: mark[i],trumpNum: k,surface: false})
         }
       }
+      for (let h = trumps.length -1; h >= 0; h--) {
+        const m = Math.floor(Math.random() * (h + 1))
+        const tmp = trumps[h]
+        trumps[h] = trumps[m]
+        trumps[m] = tmp
+        console.log(trumps[h])
+        }
     return {
+      trumps :trumps  // trumpsプロパティをもつ連想配列 
     }
   },
   methods: {
@@ -36,5 +35,20 @@ export default {
 </script>
 
 <style>
-
+.consentration-box{
+  overflow: hidden;
+  width: 1190px;
+  background-color: green;
+  margin: 50px auto;
+  padding: 10px;
+}
+.trumpsShape{
+  height: 120px;
+  width: 80px;
+  margin: 5px;
+  box-sizing: border-box;
+  float: left;
+  background-image: url("~assets/images/card_back.PNG");
+  background-size: cover;
+}
 </style>
