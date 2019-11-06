@@ -4,6 +4,7 @@
     :key="i"
     class="trumpsShape"
     @click="isSurface(trump, i)">
+    
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
@@ -40,11 +41,9 @@ export default {
       console.log(trumpImage)    
       if (trump.surface === false) {
         trump.surface = true
-        // console.log(trump, i)
-      }
-      if (trump.trumpNum < 10) {
+      } if (trump.trumpNum < 10) {
         trumpImage.push([trump.trumpMark+'0'+trump.trumpNum])
-      } else if (trump.trumpNum <= 10) {
+      } else {
         trumpImage.push([trump.trumpMark+trump.trumpNum])
       }
     }
