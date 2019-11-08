@@ -2,15 +2,20 @@
   <div class="consentration-box">
     <div v-for="(trump, i) in trumps" 
     :key="i"
-    class="trumpsShape"
-    @click="isSurface(trump, i)">
-    
+    class="trumpShape"
+    @click="clickTrump(trump)">
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
     <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
-   </div>
- </div>
+      <div v-if="trump.surface === true"> 
+        <img src="~assets/images/${trumpImage}">
+      </div>
+      <div v-else> 
+        <img src="~assets/backcard/card_back.png">
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,7 +41,7 @@ export default {
     }
   },
   methods: {
-    isSurface (trump, i) {
+    clickTrump (trump) {
       const trumpImage = []
       console.log(trumpImage)    
       if (trump.surface === false) {
@@ -59,13 +64,13 @@ export default {
   margin: 50px auto;
   padding: 10px;
 }
-.trumpsShape{
+.trumpShape{
   height: 120px;
   width: 80px;
   margin: 5px;
   box-sizing: border-box;
   float: left;
-  background-image: url("~assets/backcard/card_back.PNG");
+  background-image: url("~assets/backcard/card_back.png");
   background-size: cover;
 }
 </style>
