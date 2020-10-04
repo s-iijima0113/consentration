@@ -9,7 +9,7 @@
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
     <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
       <div v-if="trump.surface === true"> 
-        <img src="~assets/images/${trumpImage}">
+        <img :src="~assets/images/trumpImage">
       </div>
       <div v-else> 
         <img src="~assets/backcard/card_back.png">
