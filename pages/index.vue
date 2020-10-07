@@ -1,12 +1,13 @@
 <template>
   <div class="consentration-box">
     <div v-for="(trump, i) in trumps" 
-    :key="i"
+    v-bind:key="i"
     class="trumpShape"
     @click="clickTrump(trump)">
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
+    <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
       <div v-if="trump.surface === true"> 
         <img :src="~assets/images/trumpImage">
@@ -43,7 +44,7 @@ export default {
   methods: {
     clickTrump (trump) {
       const trumpImage = []
-      console.log(trumpImage)    
+      // console.log(trumpImage)    
       if (trump.surface === false) {
         trump.surface = true
       } if (trump.trumpNum < 10) {
