@@ -9,12 +9,12 @@
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
-      <div v-if="trump.surface === true"> 
-        <img :src="~assets/images/trumpImage">
-      </div>
-      <div v-else> 
-        <img src="~assets/backcard/card_back.png">
-      </div>
+      <!--<div v-if="trump.surface === true">--> 
+        <!--<img :src="~assets/images/trumpImage"> <!--ここが怪しそう-->
+      <!--</div> -->
+      <!--<div v-else> --> 
+        <!--<img src="~assets/backcard/card_back.png">-->
+      <!--</div>-->
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
       }
       for (let h = trumps.length -1; h >= 0; h--) {
         const m = Math.floor(Math.random() * (h + 1))
+        // 乱数を取得
         const tmp = trumps[h]
         trumps[h] = trumps[m]
         trumps[m] = tmp
