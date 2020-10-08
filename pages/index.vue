@@ -2,15 +2,15 @@
   <div class="consentration-box">
     <div v-for="(trump, i) in trumps" 
     v-bind:key="i"
-    class="trumpShape"
-    @click="clickTrump(trump)">
+    class="trumpShape">
+    <!-- @click="clickTrump(trump)"> -->
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
       <!--<div v-if="trump.surface === true">--> 
-        <!--<img :src="~assets/images/trumpImage"> <!--ここが怪しそう-->
+        <!--<img :src="~assets/images/trumpImage">-->
       <!--</div> -->
       <!--<div v-else> --> 
         <!--<img src="~assets/backcard/card_back.png">-->
@@ -21,6 +21,7 @@
 
 <script>
 export default {
+
   data () {
     const mark = ['h', 'd', 'c', 's']
     const trumps = []
@@ -36,7 +37,7 @@ export default {
         const tmp = trumps[h]
         trumps[h] = trumps[m]
         trumps[m] = tmp
-        // console.log(trumps[h])
+        console.log(trumps[h])
         }
     return {
       trumps :trumps  // trumpsプロパティをもつ連想配列 
@@ -45,7 +46,7 @@ export default {
   methods: {
     clickTrump (trump) {
       const trumpImage = []
-      // console.log(trumpImage)    
+      console.log(trumpImage)    
       if (trump.surface === false) {
         trump.surface = true
       } if (trump.trumpNum < 10) {
