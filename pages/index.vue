@@ -2,8 +2,8 @@
   <div class="consentration-box">
     <div v-for="(trump, i) in trumps" 
       v-bind:key="i"
-      class="trumpShape"
       @click="clickTrump(trump)">
+        <img class="trumpShape" src="@/assets/backcard/card_back.png"/>
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
@@ -40,7 +40,8 @@ export default {
         console.log(trumps[h])
         }
     return {
-      trumps :trumps  // trumpsプロパティをもつ連想配列 
+      trumps :trumps,  // trumpsプロパティをもつ連想配列
+      // imageSrc: require('@/assets/backcard/card_back.png')
     }
   },
   methods: {
@@ -55,6 +56,9 @@ export default {
       } else {
         trumpImage.push([trump.trumpMark+trump.trumpNum])
       }
+      // if (trump.surface === true) {
+        // <img src="~assets/images/trumpImage">
+      // }
     }
   }         
 }
@@ -74,7 +78,6 @@ export default {
   margin: 5px;
   box-sizing: border-box;
   float: left;
-  background-image: url("~assets/backcard/card_back.png");
   background-size: cover;
 }
 </style>
