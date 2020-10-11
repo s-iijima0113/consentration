@@ -3,7 +3,8 @@
     <div v-for="(trump, i) in trumps" 
       v-bind:key="i"
       @click="clickTrump(trump)">
-        <img class="trumpShape" src="@/assets/backcard/card_back.png"/>
+        <v-if="isActive === false" 初期表示の内容/>
+        <v-else クリックで切り替わった内容 />
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
@@ -41,10 +42,13 @@ export default {
         }
     return {
       trumps :trumps,  // trumpsプロパティをもつ連想配列
-      // imageSrc: require('@/assets/backcard/card_back.png')
+      isActive: false
     }
   },
   methods: {
+    clickTrump: function() {
+      this.isActive = !this.isActive
+    },
     clickTrump(trump) {
       console.log(trump)
       const trumpImage = []
