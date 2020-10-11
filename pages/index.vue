@@ -3,8 +3,12 @@
     <div v-for="(trump, i) in trumps" 
       v-bind:key="i"
       @click="clickTrump(trump)">
-        <v-if="isActive === false" 初期表示の内容/>
-        <v-else クリックで切り替わった内容 />
+        <div v-if="isActive === false">
+          <img class="trumpShape" src="@/assets/backcard/card_back.png">
+        </div>
+        <div v-else>
+          <img class="trumpShape" src="@/assets/images/c01.gif">
+        </div>
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
@@ -22,7 +26,6 @@
 
 <script>
 export default {
-
   data () {
     const mark = ['h', 'd', 'c', 's']
     const trumps = []
@@ -46,10 +49,8 @@ export default {
     }
   },
   methods: {
-    clickTrump: function() {
-      this.isActive = !this.isActive
-    },
     clickTrump(trump) {
+      this.isActive = !this.isActive
       console.log(trump)
       const trumpImage = []
       console.log(trumpImage)    
