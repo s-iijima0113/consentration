@@ -1,14 +1,16 @@
 <template>
   <div class="consentration-box">
     <div v-for="(trump, i) in trumps" 
-      v-bind:key="i"
-      @click="clickTrump(trump)">
+      v-bind:key="i">
+    </div>
+      <div @click="clickTrump(trump)">
         <div v-if="isActive === false">
           <img class="trumpShape" src="@/assets/backcard/card_back.png">
         </div>
         <div v-else>
           <img class="trumpShape" src="@/assets/images/c01.gif">
         </div>
+      </div>
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
@@ -19,8 +21,7 @@
       <!--</div> -->
       <!--<div v-else> --> 
         <!--<img src="~assets/backcard/card_back.png">-->
-      <!--</div>-->
-    </div>
+      <!--</div>-->   
   </div>
 </template>
 
@@ -41,7 +42,7 @@ export default {
         const tmp = trumps[h]
         trumps[h] = trumps[m]
         trumps[m] = tmp
-        console.log(trumps[h])
+        // console.log(trumps[h])
         }
     return {
       trumps :trumps,  // trumpsプロパティをもつ連想配列
@@ -54,13 +55,13 @@ export default {
       console.log(trump)
       const trumpImage = []
       console.log(trumpImage)    
-      if (trump.surface === false) {
-        trump.surface = true
-      } if (trump.trumpNum < 10) {
-        trumpImage.push([trump.trumpMark+'0'+trump.trumpNum])
-      } else {
-        trumpImage.push([trump.trumpMark+trump.trumpNum])
-      }
+      //if (trump.surface === false) {
+        //trump.surface = true
+      //} if (trump.trumpNum < 10) {
+        //trumpImage.push([trump.trumpMark+'0'+trump.trumpNum])
+      //} else {
+        //trumpImage.push([trump.trumpMark+trump.trumpNum])
+      //}
       // if (trump.surface === true) {
         // <img src="~assets/images/trumpImage">
       // }
