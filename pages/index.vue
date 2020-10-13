@@ -2,8 +2,8 @@
   <div class="consentration-box">
     <div v-for="(trump, i) in trumps" 
       v-bind:key="i">
-      <img src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back" class="trumpShape"
-       @click="clickTrump(trump)" />
+      <img v-bind:src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back" class="trumpShape"
+       @click="clickTrump(i)" />
     </div>
     <!--div v-if="isActive === false"-->
       <!--img class="trumpShape" src="@/assets/backcard/card_back.png"-->
@@ -36,11 +36,12 @@ export default {
           let trump = {
             isOpen: false, //初期はfalse
             trumpInfo: {
+              mark: i,
               number: k,
               front: require("@/assets/images/c01.gif"), //裏
               back: require("@/assets/backcard/card_back.png") //表
             }
-          };
+          }
           trumps.push(trump)
         }
       }
@@ -54,12 +55,12 @@ export default {
         }
     return {
       trumps :trumps,  // trumpsプロパティをもつ連想配列
-      isActive: false
     }
   },
   methods: {
-    clickTrump(trump) {
-      this.isActive = !this.isActive
+    clickTrump: function(i) {
+      //カードを表向きにする
+      this.trumps[i].isOpen = true
       //console.log(trump)
       //const trumpImage = []
       //console.log(trumpImage)    
@@ -74,7 +75,7 @@ export default {
         // <img src="~assets/images/trumpImage">
       // }
     }
-  }         
+  },         
 }
 </script>
 
