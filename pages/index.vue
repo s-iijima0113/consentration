@@ -2,16 +2,15 @@
   <div class="consentration-box">
     <div v-for="(trump, i) in trumps" 
       v-bind:key="i">
-      <img src="@/assets/backcard/card_back.png" class="trumpShape"/>
+      <img src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back" class="trumpShape"
+       @click="clickTrump(trump)" />
     </div>
-      <div @click="clickTrump(trump)">
-        <div v-if="isActive === false">
-          <img class="trumpShape" src="@/assets/backcard/card_back.png">
-        </div>
-        <div v-else>
-          <img class="trumpShape" src="@/assets/images/c01.gif">
-        </div>
-      </div>     
+    <!--div v-if="isActive === false"-->
+      <!--img class="trumpShape" src="@/assets/backcard/card_back.png"-->
+    <!--/div-->
+    <!--div v-else-->
+      <!--img class="trumpShape" src="@/assets/images/c01.gif"-->
+    <!--/div-->   
     <!-- ①trumpsの配列を引っ張ってきている。 -->
     <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
     <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
@@ -23,7 +22,6 @@
       <!--<div v-else> --> 
         <!--<img src="~assets/backcard/card_back.png">-->
       <!--</div>-->
-      
   </div>
 </template>
 
@@ -35,7 +33,15 @@ export default {
     //console.log(trumps)
       for (let i = 0; i < 4; i++) {
         for (let k = 1; k <= 13; k++) {
-        trumps.push({trumpMark: mark[i],trumpNum: k,surface: false})
+          let trump = {
+            isOpen: false, //初期はfalse
+            trumpInfo: {
+              number: k,
+              front: require("@/assets/images/c01.gif"), //裏
+              back: require("@/assets/backcard/card_back.png") //表
+            }
+          };
+          trumps.push(trump)
         }
       }
       for (let h = trumps.length -1; h >= 0; h--) {
@@ -54,16 +60,16 @@ export default {
   methods: {
     clickTrump(trump) {
       this.isActive = !this.isActive
-      console.log(trump)
-      const trumpImage = []
-      console.log(trumpImage)    
+      //console.log(trump)
+      //const trumpImage = []
+      //console.log(trumpImage)    
       //if (trump.surface === false) {
         //trump.surface = true
-      if (trump.trumpNum < 10) {
-        trumpImage.push([trump.trumpMark+'0'+trump.trumpNum])
-      } else {
-        trumpImage.push([trump.trumpMark+trump.trumpNum])
-      }
+      //if (trump.trumpNum < 10) {
+        //trumpImage.push([trump.trumpMark+'0'+trump.trumpNum])
+      //} else {
+        //trumpImage.push([trump.trumpMark+trump.trumpNum])
+      //}
       // if (trump.surface === true) {
         // <img src="~assets/images/trumpImage">
       // }
