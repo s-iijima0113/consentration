@@ -28,21 +28,24 @@
 <script>
 export default {
   data () {
-    const mark = ['h', 'd', 'c', 's']
+    const marks = ['h', 'd', 'c', 's']
     const trumps = []
     //console.log(trumps)
       for (let i = 0; i < 4; i++) {
         for (let k = 1; k <= 13; k++) {
+          let numbers = (`00` + k).slice(-2)
           let trump = {
             isOpen: false, //初期はfalse
             trumpInfo: {
-              mark: i,
-              number: k,
-              front: require("@/assets/images/c01.gif"), //裏
+              mark: marks[i],
+              number: numbers,
+              front: require(`@/assets/images/${marks[i]}${numbers}.gif`), //裏
               back: require("@/assets/backcard/card_back.png") //表
             }
           }
           trumps.push(trump)
+          console.log(trump)
+          //console.log(trump.mark)
         }
       }
       for (let h = trumps.length -1; h >= 0; h--) {
@@ -51,7 +54,7 @@ export default {
         const tmp = trumps[h]
         trumps[h] = trumps[m]
         trumps[m] = tmp
-        console.log(trumps[h])
+        //console.log(trumps[h])
         }
     return {
       trumps :trumps,  // trumpsプロパティをもつ連想配列
