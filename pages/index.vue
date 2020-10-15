@@ -28,8 +28,8 @@
 <script>
 export default {
   data () {
-    const marks = ['h', 'd', 'c', 's']
     const trumps = []
+    const marks = ['h', 'd', 'c', 's']
     //console.log(trumps)
       for (let i = 0; i < 4; i++) {
         for (let k = 1; k <= 13; k++) {
@@ -44,18 +44,18 @@ export default {
             }
           }
           trumps.push(trump)
-          console.log(trump)
+          //console.log(trump)
           //console.log(trump.mark)
         }
       }
       for (let h = trumps.length -1; h >= 0; h--) {
-        const m = Math.floor(Math.random() * (h + 1))
-        // 乱数を取得
-        const tmp = trumps[h]
-        trumps[h] = trumps[m]
-        trumps[m] = tmp
-        //console.log(trumps[h])
+          const m = Math.floor(Math.random() * (h + 1))
+          // 乱数を取得
+          const tmp = trumps[h]
+          trumps[h] = trumps[m]
+          trumps[m] = tmp
         }
+          console.log(trumps)
     return {
       trumps :trumps,  // trumpsプロパティをもつ連想配列
     }
@@ -63,6 +63,7 @@ export default {
   methods: {
     clickTrump: function(i) {
       //カードを表向きにする
+      const clickTrumpNum = []
       this.trumps[i].isOpen = true
       //console.log(trump)
       //const trumpImage = []
