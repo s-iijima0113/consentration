@@ -33,21 +33,19 @@ export default {
     const trumps = [];
     const marks = ["h", "d", "c", "s"];
     //console.log(trumps)
-    for (let i = 0; i < 4; i++) {
+    for (let m = 0; m < 4; m++) {
       for (let k = 1; k <= 13; k++) {
         let numbers = (`00` + k).slice(-2);
         let trump = {
           isOpen: false, //初期はfalse
           trumpInfo: {
-            mark: marks[i],
+            mark: marks[m],
             number: numbers,
-            front: require(`@/assets/images/${marks[i]}${numbers}.gif`), //裏
+            front: require(`@/assets/images/${marks[m]}${numbers}.gif`), //裏
             back: require("@/assets/backcard/card_back.png"), //表
           },
         };
         trumps.push(trump);
-        //console.log(trump)
-        //console.log(trump.mark)
       }
     }
     for (let h = trumps.length - 1; h >= 0; h--) {
@@ -57,19 +55,37 @@ export default {
       trumps[h] = trumps[m];
       trumps[m] = tmp;
     }
-    //console.log(trumps)
+    // if (this.lastFlippedTrumpIndex === i) {
+    //   this.trumps[i].isOpen = true;
+    // } else {
+    //   this.trumps[i].isOpen = false;
+    // }
+
     return {
       trumps: trumps, // trumpsプロパティをもつ連想配列
+      lastFlippedTrumpIndex: undefined,
     };
   },
   methods: {
     clickTrump: function (i) {
       //カードを表向きにする
+      // console.log(this.lastFlippedTrumpIndex);
+      // 1: undefined
+      // 2: 2
+      // この下からdata()のreturnを返してくる。lastFlippedTrumpIndexにiを代入している。
+      this.lastFlippedTrumpIndex = i;
+      // 1: 2
+      // 2: 3
+      // 何番目のトランプをクリックしたかわかる
+      // console.log(i);
+      let firstTrumpClick = this.trumps[i];
+      console.log(this.trumps[i]);
+      // let hoge = this.trumps[i];
       this.trumps[i].isOpen = true;
-      //console.log(trump)
-      //const trumpImage = []
-      //console.log(trumpImage)
-      //if (trump.surface === false) {
+      // console.log(this.trumps[i]);
+      // const trumpImage = []
+      // console.log(trumpImage)
+      // if (trump.surface === false) {
       //trump.surface = true
       //if (trump.trumpNum < 10) {
       //trumpImage.push([trump.trumpMark+'0'+trump.trumpNum])
