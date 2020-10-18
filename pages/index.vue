@@ -60,11 +60,14 @@ export default {
     //console.log(trumps)
     return {
       trumps: trumps, // trumpsプロパティをもつ連想配列
+      lastFlippedTrumpIndex: undefined,
     };
   },
   methods: {
     clickTrump: function (i) {
       //カードを表向きにする
+      this.lastFlippedTrumpIndex = i;
+      console.log(this.lastFlippedTrumpIndex);
       this.trumps[i].isOpen = true;
       //console.log(trump)
       //const trumpImage = []
