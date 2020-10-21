@@ -30,6 +30,8 @@
 <script>
 export default {
   data() {
+    // let x = data();
+    // console.log(x);
     const trumps = [];
     const marks = ["h", "d", "c", "s"];
     //console.log(trumps)
@@ -55,34 +57,17 @@ export default {
       trumps[h] = trumps[m];
       trumps[m] = tmp;
     }
-    // if (this.lastFlippedTrumpIndex === i) {
-    //   this.trumps[i].isOpen = true;
-    // } else {
-    //   this.trumps[i].isOpen = false;
-    // }
-
+    // console.log(this.lastFlippedTrumpIndex);
     return {
       trumps: trumps, // trumpsプロパティをもつ連想配列
       lastFlippedTrumpIndex: undefined,
     };
   },
+  // console,log(lastFlippedTrumpIndex)
   methods: {
     clickTrump: function (i) {
       //カードを表向きにする
-      // console.log(this.lastFlippedTrumpIndex);
-      // 1: undefined
-      // 2: 2
-      // この下からdata()のreturnを返してくる。lastFlippedTrumpIndexにiを代入している。
-      this.lastFlippedTrumpIndex = i;
-      // 1: 2
-      // 2: 3
-      // 何番目のトランプをクリックしたかわかる
-      // console.log(i);
-      let firstTrumpClick = this.trumps[i];
-      console.log(this.trumps[i]);
-      // let hoge = this.trumps[i];
       this.trumps[i].isOpen = true;
-      // console.log(this.trumps[i]);
       // const trumpImage = []
       // console.log(trumpImage)
       // if (trump.surface === false) {
@@ -95,6 +80,33 @@ export default {
       // if (trump.surface === true) {
       // <img src="~assets/images/trumpImage">
       // }
+
+      // console.log(this.lastFlippedTrumpIndex);
+      // 1: undefined
+      // 2: 2
+      // この下からdata()のreturnを返してくる。lastFlippedTrumpIndexにiを代入している。
+      this.lastFlippedTrumpIndex = i;
+      // 1: 2
+      // 2: 3
+      // 何番目のトランプをクリックしたかわかる
+      // let firstTrumpClick = this.trumps[i];
+      // let hoge = this.trumps[i];
+      if (
+        this.trumps[this.lastFlippedTrumpIndex].trumpInfo.number ===
+        this.trumps[i].trumpInfo.number
+      ) {
+        // console.log(this.trumps[this.lastFlippedTrumpIndex].trumpInfo.number);
+        // console.log(this.trumps[i].trumpInfo.number);
+        //トランプ表のまま
+        this.trumps[i].isOpen = true;
+        // console.log(this.trumps[i].isOpen);
+      } else {
+        //トランプを返す
+        this.trumps[i].isOpen = false;
+        // console.log(this.trumps[i].isOpen);
+      }
+      // this.result.push(document.getElementById(x));
+      // console.log(hoge);
     },
   },
 };
