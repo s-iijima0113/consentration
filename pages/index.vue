@@ -95,6 +95,18 @@ export default {
       this.lastFlippedTrumpIndex = i;
 
       //カードを表向きにする
+      // index=5, 7 の順に押したとき
+      // 1st: lastFlippedTrumpIndex => undefined
+      // 2nd: lastFlippedTrumpIndex => 5
+      // if (lastFlippedTrumpIndex === undefined) {
+      //   // 表になっているカードがない
+      //   //lastFlippedTrumpIndex に押された index を保存しておく
+      // } else {
+      //   // すでに1枚表のとき
+      //   // lastFlippedTrumpIndex と押されたカードを比較
+      // }
+      this.lastFlippedTrumpIndex = i;
+      console.log(this.lastFlippedTrumpIndex);
       this.trumps[i].isOpen = true;
     },
   },
