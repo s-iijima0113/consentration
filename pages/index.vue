@@ -57,56 +57,45 @@ export default {
       trumps[h] = trumps[m];
       trumps[m] = tmp;
     }
-    // console.log(this.lastFlippedTrumpIndex);
     return {
       trumps: trumps, // trumpsプロパティをもつ連想配列
       lastFlippedTrumpIndex: undefined,
     };
   },
-  // console,log(lastFlippedTrumpIndex)
+
   methods: {
     clickTrump: function (i) {
-      //カードを表向きにする
-      this.trumps[i].isOpen = true;
       // const trumpImage = []
-      // console.log(trumpImage)
-      // if (trump.surface === false) {
-      //trump.surface = true
-      //if (trump.trumpNum < 10) {
-      //trumpImage.push([trump.trumpMark+'0'+trump.trumpNum])
-      //} else {
-      //trumpImage.push([trump.trumpMark+trump.trumpNum])
-      //}
-      // if (trump.surface === true) {
-      // <img src="~assets/images/trumpImage">
-      // }
-
-      // console.log(this.lastFlippedTrumpIndex);
       // 1: undefined
       // 2: 2
       // この下からdata()のreturnを返してくる。lastFlippedTrumpIndexにiを代入している。
-      this.lastFlippedTrumpIndex = i;
       // 1: 2
       // 2: 3
+      // console.log(i);
       // 何番目のトランプをクリックしたかわかる
       // let firstTrumpClick = this.trumps[i];
       // let hoge = this.trumps[i];
-      if (
-        this.trumps[this.lastFlippedTrumpIndex].trumpInfo.number ===
-        this.trumps[i].trumpInfo.number
-      ) {
-        // console.log(this.trumps[this.lastFlippedTrumpIndex].trumpInfo.number);
-        // console.log(this.trumps[i].trumpInfo.number);
+
+      //もし同じ番号だったら
+
+      const secondClickedTrump = this.trumps[i];
+      const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
+      if (firstClickedTrump) {
+        console.log(firstClickedTrump.trumpInfo);
+        console.log(secondClickedTrump.trumpInfo);
+      }
+      // console.log(this.trumps[i].trumpInfo.number);
+      if (this.trumps[this.lastFlippedTrumpIndex] === this.trumps[i]) {
         //トランプ表のまま
         this.trumps[i].isOpen = true;
-        // console.log(this.trumps[i].isOpen);
       } else {
         //トランプを返す
         this.trumps[i].isOpen = false;
-        // console.log(this.trumps[i].isOpen);
       }
-      // this.result.push(document.getElementById(x));
-      // console.log(hoge);
+      this.lastFlippedTrumpIndex = i;
+
+      //カードを表向きにする
+      this.trumps[i].isOpen = true;
     },
   },
 };
