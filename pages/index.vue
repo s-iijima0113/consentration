@@ -80,14 +80,20 @@ export default {
 
       const secondClickedTrump = this.trumps[i];
       const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
+      if (firstClickedTrump == undefined) {
+        this.trumps[i].isOpen = true;
+      }
+
       if (firstClickedTrump) {
         if (
           firstClickedTrump.trumpInfo.number ===
           secondClickedTrump.trumpInfo.number
         ) {
-          this.trumps[i].isOpen = true;
+          secondClickedTrump.isOpen = true;
         } else {
-          this.trumps[i].isOpen = false;
+          secondClickedTrump.isOpen = false;
+          firstClickedTrump.isOpen = false;
+          console.log(secondClickedTrump.isOpen);
         }
       }
       this.lastFlippedTrumpIndex = i;
@@ -106,7 +112,7 @@ export default {
       // this.lastFlippedTrumpIndex = i;
 
       //カードを表向きにする
-      this.trumps[i].isOpen = true;
+      // this.trumps[i].isOpen = true;
     },
   },
 };
