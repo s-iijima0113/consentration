@@ -2,7 +2,11 @@
   <div class="consentration-box">
     <div v-for="(trump, i) in trumps" v-bind:key="i">
       <img
-        v-bind:src="trump.isOpen ? trump.trumpInfo.front : trump.trumpInfo.back"
+        v-bind:src="
+          trump.isOpen || trump.isGet != null
+            ? trump.trumpInfo.front
+            : trump.trumpInfo.back
+        "
         class="trumpShape"
         @click="clickTrump(i)"
       />
@@ -28,6 +32,7 @@
 </template>
 
 <script>
+const PLAYER = "Player";
 export default {
   data() {
     // let x = data();
@@ -40,6 +45,7 @@ export default {
         let numbers = (`00` + k).slice(-2);
         let trump = {
           isOpen: false, //初期はfalse
+          isGet: null,
           trumpInfo: {
             mark: marks[m],
             number: numbers,
@@ -80,20 +86,32 @@ export default {
 
       const secondClickedTrump = this.trumps[i];
       const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
+      const theSameNumber = [];
       if (firstClickedTrump == undefined) {
         this.trumps[i].isOpen = true;
+        console.log("1枚目のトランプを表にする");
       }
 
-      if (firstClickedTrump) {
+      if (firstClickedTrump != undefined) {
+        secondClickedTrump.isOpen = true;
+        console.log("2枚目のトランプを表にする");
         if (
           firstClickedTrump.trumpInfo.number ===
           secondClickedTrump.trumpInfo.number
         ) {
-          secondClickedTrump.isOpen = true;
+          console.log("同じ番号だよ！");
+          //ずっとカードを表にする
+          secondClickedTrump.isGet = PLAYER;
+          firstClickedTrump.isGet = PLAYER;
         } else {
-          secondClickedTrump.isOpen = false;
-          firstClickedTrump.isOpen = false;
-          console.log(secondClickedTrump.isOpen);
+          setTimeout(function () {
+            console.log("違う番号だよ！");
+            secondClickedTrump.isOpen = false;
+            firstClickedTrump.isOpen = false;
+          }, 1000);
+          //1秒間トランプの表を表示した後裏にturnする
+
+          // console.log(secondClickedTrump.isOpen);
         }
       }
       this.lastFlippedTrumpIndex = i;
