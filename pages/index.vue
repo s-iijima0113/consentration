@@ -32,7 +32,8 @@
 </template>
 
 <script>
-const openedTrump = 0;
+//クリックしたトランプの数を把握
+let openedTrump = 0;
 const PLAYER = "Player";
 export default {
   data() {
@@ -90,20 +91,20 @@ export default {
       //1枚目を表にする
       if (firstClickedTrump == undefined) {
         this.trumps[i].isOpen = true;
-
-        console.log(firstClickedTrump);
+        // console.log(firstClickedTrump);
         console.log("1枚目のトランプを表にする");
       }
 
       //2枚目を表にする
       if (firstClickedTrump != undefined) {
         secondClickedTrump.isOpen = true;
-        this.openedTrump = 1;
-        console.log(this.openedTrump);
-        console.log(secondClickedTrump.trumpInfo.number);
+        openedTrump++;
+        console.log(openedTrump);
+        // console.log(secondClickedTrump.trumpInfo.number);
         console.log("2枚目のトランプを表にする");
         // console.log(this.lastFlippedTrumpIndex);
         this.isNumMatch(i);
+        this.reset(i);
       }
       this.lastFlippedTrumpIndex = i;
     },
@@ -126,6 +127,14 @@ export default {
           firstClickedTrump.isOpen = false;
         }, 1000);
         // 1秒間トランプの表を表示した後裏にturnする
+      }
+    },
+
+    reset: function (i) {
+      if (this.openedTrump == 2) {
+        secondClickedTrump.isOpen = false;
+        firstClickedTrump.isOpen = false;
+        this.openedTrump = 0;
       }
     },
 
