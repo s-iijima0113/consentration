@@ -87,7 +87,7 @@ export default {
       const secondClickedTrump = this.trumps[i];
       const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
       //2枚以上はめくれないようにする
-      if (this.openedTrump + 1 > 2) return;
+      if (openedTrump + 1 > 2) return;
       //1枚目を表にする
       if (firstClickedTrump == undefined) {
         this.trumps[i].isOpen = true;
@@ -104,7 +104,9 @@ export default {
         console.log("2枚目のトランプを表にする");
         // console.log(this.lastFlippedTrumpIndex);
         this.isNumMatch(i);
-        this.reset(i);
+        if (openedTrump == 2) {
+          this.reset(i);
+        }
       }
       this.lastFlippedTrumpIndex = i;
     },
@@ -131,10 +133,12 @@ export default {
     },
 
     reset: function (i) {
-      if (this.openedTrump == 2) {
+      const secondClickedTrump = this.trumps[i];
+      const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
+      if (openedTrump == 2) {
         secondClickedTrump.isOpen = false;
         firstClickedTrump.isOpen = false;
-        this.openedTrump = 0;
+        openedTrump = 0;
       }
     },
 
