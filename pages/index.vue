@@ -37,9 +37,11 @@ let openedTrump = 0;
 const PLAYER = "Player";
 export default {
   data() {
-    // let x = data();
-    // console.log(x);
-    const trumps = [];
+    return {
+      trumps: [],
+    };
+  },
+  mounted() {
     const marks = ["h", "d", "c", "s"];
     //console.log(trumps)
     for (let m = 0; m < 4; m++) {
@@ -55,19 +57,19 @@ export default {
             back: require("@/assets/backcard/card_back.png"), //表
           },
         };
-        trumps.push(trump);
+        this.trumps.push(trump);
       }
     }
-    for (let h = trumps.length - 1; h >= 0; h--) {
+    for (let h = this.trumps.length - 1; h >= 0; h--) {
       const m = Math.floor(Math.random() * (h + 1));
       // 乱数を取得
-      const tmp = trumps[h];
-      trumps[h] = trumps[m];
-      trumps[m] = tmp;
+      const tmp = this.trumps[h];
+      this.trumps[h] = this.trumps[m];
+      this.trumps[m] = tmp;
     }
     return {
-      trumps: trumps, // trumpsプロパティをもつ連想配列
-      lastFlippedTrumpIndex: undefined,
+      trumps: this.trumps, // trumpsプロパティをもつ連想配列
+      // trumps: [], // clickedTrumps: [],
     };
   },
 
@@ -84,63 +86,108 @@ export default {
       // let firstTrumpClick = this.trumps[i];
       // let hoge = this.trumps[i];
 
-      const secondClickedTrump = this.trumps[i];
-      const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
+      // const secondClickedTrump = this.trumps[i];
+      // const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
       //2枚以上はめくれないようにする
-      if (openedTrump + 1 > 2) return;
-      //1枚目を表にする
-      if (firstClickedTrump == undefined) {
-        this.trumps[i].isOpen = true;
-        // console.log(firstClickedTrump);
-        console.log("1枚目のトランプを表にする");
-      }
-
-      //2枚目を表にする
-      if (firstClickedTrump != undefined) {
-        secondClickedTrump.isOpen = true;
-        openedTrump++;
-        console.log(openedTrump);
-        // console.log(secondClickedTrump.trumpInfo.number);
-        console.log("2枚目のトランプを表にする");
-        // console.log(this.lastFlippedTrumpIndex);
-        this.isNumMatch(i);
-        if (openedTrump == 2) {
-          this.reset(i);
-        }
-      }
-      this.lastFlippedTrumpIndex = i;
-    },
-
-    isNumMatch: function (i) {
-      const secondClickedTrump = this.trumps[i];
-      const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
-      if (
-        firstClickedTrump.trumpInfo.number ===
-        secondClickedTrump.trumpInfo.number
-      ) {
-        console.log("同じ番号だよ！");
-        //ずっとカードを表にする
-        secondClickedTrump.isGet = PLAYER;
-        firstClickedTrump.isGet = PLAYER;
-      } else {
-        setTimeout(function () {
-          console.log("違う番号だよ！");
-          secondClickedTrump.isOpen = false;
-          firstClickedTrump.isOpen = false;
-        }, 1000);
-        // 1秒間トランプの表を表示した後裏にturnする
-      }
-    },
-
-    reset: function (i) {
-      const secondClickedTrump = this.trumps[i];
-      const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
+      // if (openedTrump + 1 > 2) return;
+      // //1枚目を表にする
+      // // if (firstClickedTrump == 1) {
+      // const clickedTrumps = [];
+      // clickedTrumps.push(i);
+      console.log(this.trumps[i]);
+      this.trumps[i].isOpen = true;
+      // console.log(firstClickedTrump);
+      // console.log("1枚目のトランプを表にする");
+      openedTrump++;
+      console.log(openedTrump);
+      // console.log(openedTrump);
+      // console.log("1枚目" + i);
+      // console.log(openedTrump);
       if (openedTrump == 2) {
-        secondClickedTrump.isOpen = false;
-        firstClickedTrump.isOpen = false;
-        openedTrump = 0;
+        // console.log(openedTrump);
+        // console.log("2枚目" + i);
+
+        // this.isNumMatch(i);
+        this.reset();
       }
     },
+    // isNumMatch: function (i) {},
+
+    reset: function () {
+      this.trumps = this.trumps.map(function (trump) {
+        if (trump.isOpen) {
+          return { ...trump, isOpen: false };
+        } else {
+          return trump;
+        }
+      });
+      openedTrump = 0;
+    },
+
+    // reset: function () {
+    //   setTimeout(
+    //     function () {
+    //       this.trumps.forEach(function (trump, i) {
+    //         if (trump.isOpen) {
+    //           this.trump.isOpen = false;
+    //         }
+    //       });
+    //       // console.log(this.trump);
+    //       // firstClickedTrump.isOpen = false;
+    //       // console.log(openedTrump);
+    //     }.bind(this),
+    //     1000
+    //   );
+    //   openedTrump = 0;
+    // },
+    // //2枚目を表にする
+    //   if (firstClickedTrump != 1) {
+    //     secondClickedTrump.isOpen = true;
+    //     openedTrump++;
+    //     console.log(openedTrump);
+    //     // console.log(secondClickedTrump.trumpInfo.number);
+    //     console.log("2枚目のトランプを表にする");
+    //     // console.log(this.lastFlippedTrumpIndex);
+    //     this.isNumMatch(i);
+    //   }
+    //   this.lastFlippedTrumpIndex = i;
+    // },
+
+    // isNumMatch: function (i) {
+    //   const secondClickedTrump = this.trumps[i];
+    //   const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
+    //   if (
+    //     firstClickedTrump.trumpInfo.number ===
+    //     secondClickedTrump.trumpInfo.number
+    //   ) {
+    //     console.log("同じ番号だよ！");
+    //     //ずっとカードを表にする
+    //     secondClickedTrump.isGet = PLAYER;
+    //     firstClickedTrump.isGet = PLAYER;
+    //     // } else {
+    //     //   setTimeout(function () {
+    //     //     console.log("違う番号だよ！");
+    //     //     secondClickedTrump.isOpen = false;
+    //     //     firstClickedTrump.isOpen = false;
+    //     //   }, 1000);
+    //     //   // 1秒間トランプの表を表示した後裏にturnする
+    //   } else {
+    //     this.reset(i);
+    //   }
+    // },
+
+    // reset: function (i) {
+    //   const secondClickedTrump = this.trumps[i];
+    //   const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
+    //   setTimeout(function () {
+    //     console.log("違う番号だよ！");
+    //     secondClickedTrump.isOpen = false;
+    //     firstClickedTrump.isOpen = false;
+    //     console.log(openedTrump);
+    //   }, 2000);
+    //   // 1秒間トランプの表を表示した後裏にturnする
+    //   openedTrump = 0;
+    // },
 
     // console.log(secondClickedTrump.isOpen);
     // }
