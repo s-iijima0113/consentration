@@ -114,14 +114,17 @@ export default {
     // isNumMatch: function (i) {},
 
     reset: function () {
-      this.trumps = this.trumps.map(function (trump) {
-        if (trump.isOpen) {
-          return { ...trump, isOpen: false };
-        } else {
-          return trump;
-        }
-      });
-      openedTrump = 0;
+      setTimeout(() => {
+        this.trumps = this.trumps.map(function (trump) {
+          if (trump.isOpen) {
+            return { ...trump, isOpen: false }; //{...trumpでtrumpのコピーオブジェクトができて、,isOpen: false}で部分的に上書きできる
+          } else {
+            return trump; //処理に関係ないtrumpはコピーせずにreturn
+          }
+        });
+        // setTimeout(this.trump, 1000);
+        openedTrump = 0;
+      }, 2000);
     },
 
     // reset: function () {
