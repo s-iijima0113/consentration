@@ -75,6 +75,9 @@ export default {
 
   methods: {
     clickTrump: function (i) {
+      console.log(openedTrump);
+      if (openedTrump >= 2) return;
+      console.log(openedTrump);
       // const trumpImage = []
       // 1: undefined
       // 2: 2
@@ -94,20 +97,12 @@ export default {
       // // if (firstClickedTrump == 1) {
       // const clickedTrumps = [];
       // clickedTrumps.push(i);
-      console.log(this.trumps[i]);
+
       this.trumps[i].isOpen = true;
-      // console.log(firstClickedTrump);
-      // console.log("1枚目のトランプを表にする");
+      // console.log(this.trumps[i]);
       openedTrump++;
       console.log(openedTrump);
-      // console.log(openedTrump);
-      // console.log("1枚目" + i);
-      // console.log(openedTrump);
       if (openedTrump == 2) {
-        // console.log(openedTrump);
-        // console.log("2枚目" + i);
-
-        // this.isNumMatch(i);
         this.reset();
       }
     },
@@ -122,9 +117,8 @@ export default {
             return trump; //処理に関係ないtrumpはコピーせずにreturn
           }
         });
-        // setTimeout(this.trump, 1000);
         openedTrump = 0;
-      }, 2000);
+      }, 3000);
     },
 
     // reset: function () {
