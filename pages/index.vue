@@ -107,7 +107,7 @@ export default {
     reset: function () {
       setTimeout(() => {
         this.trumps = this.trumps.map(function (trump) {
-          if (trump.isOpen) {
+          if (trump.isOpen && trump.isGet == null) {
             return { ...trump, isOpen: false }; //{...trumpでtrumpのコピーオブジェクトができて、,isOpen: false}で部分的に上書きできる
           } else {
             return trump; //処理に関係ないtrumpはコピーせずにreturn
@@ -164,6 +164,10 @@ export default {
         secondClickedTrump.trump.trumpInfo.number
       ) {
         console.log("同じ番号だよ！");
+        // console.log(firstClickedTrump.trump.isGet);
+        firstClickedTrump.trump.isGet = PLAYER;
+        secondClickedTrump.trump.isGet = PLAYER;
+        this.reset();
         //ずっとカードを表にする
         // secondClickedTrump.isGet = PLAYER;
         // firstClickedTrump.isGet = PLAYER;
