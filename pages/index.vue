@@ -43,7 +43,6 @@ export default {
   },
   mounted() {
     const marks = ["h", "d", "c", "s"];
-    //console.log(trumps)
     for (let m = 0; m < 4; m++) {
       for (let k = 1; k <= 13; k++) {
         let numbers = (`00` + k).slice(-2);
@@ -75,9 +74,7 @@ export default {
 
   methods: {
     clickTrump: function (i) {
-      console.log(openedTrump);
       if (openedTrump >= 2) return;
-      console.log(openedTrump);
       // const trumpImage = []
       // 1: undefined
       // 2: 2
@@ -97,13 +94,12 @@ export default {
       // // if (firstClickedTrump == 1) {
       // const clickedTrumps = [];
       // clickedTrumps.push(i);
-
       this.trumps[i].isOpen = true;
-      // console.log(this.trumps[i]);
       openedTrump++;
-      console.log(openedTrump);
+      // console.log(openedTrump);
       if (openedTrump == 2) {
-        this.reset();
+        this.isNumMatch();
+        // this.reset();
       }
     },
     // isNumMatch: function (i) {},
@@ -150,28 +146,38 @@ export default {
     //   this.lastFlippedTrumpIndex = i;
     // },
 
-    // isNumMatch: function (i) {
-    //   const secondClickedTrump = this.trumps[i];
-    //   const firstClickedTrump = this.trumps[this.lastFlippedTrumpIndex];
-    //   if (
-    //     firstClickedTrump.trumpInfo.number ===
-    //     secondClickedTrump.trumpInfo.number
-    //   ) {
-    //     console.log("同じ番号だよ！");
-    //     //ずっとカードを表にする
-    //     secondClickedTrump.isGet = PLAYER;
-    //     firstClickedTrump.isGet = PLAYER;
-    //     // } else {
-    //     //   setTimeout(function () {
-    //     //     console.log("違う番号だよ！");
-    //     //     secondClickedTrump.isOpen = false;
-    //     //     firstClickedTrump.isOpen = false;
-    //     //   }, 1000);
-    //     //   // 1秒間トランプの表を表示した後裏にturnする
-    //   } else {
-    //     this.reset(i);
-    //   }
-    // },
+    isNumMatch: function () {
+      const clickedTrumps = [];
+      this.trumps.forEach((trump, i) => {
+        if (trump.isOpen && trump.isGet == null) {
+          clickedTrumps.push({ i, trump });
+        }
+      });
+      console.log(clickedTrumps);
+      const firstClickedTrump = clickedTrumps[0];
+      const secondClickedTrump = clickedTrumps[1];
+      console.log(firstClickedTrump);
+      console.log(secondClickedTrump);
+
+      if (
+        firstClickedTrump.trump.trumpInfo.number ===
+        secondClickedTrump.trump.trumpInfo.number
+      ) {
+        console.log("同じ番号だよ！");
+        //ずっとカードを表にする
+        // secondClickedTrump.isGet = PLAYER;
+        // firstClickedTrump.isGet = PLAYER;
+        // } else {
+        //   setTimeout(function () {
+        //     console.log("違う番号だよ！");
+        //     secondClickedTrump.isOpen = false;
+        //     firstClickedTrump.isOpen = false;
+        //   }, 1000);
+        //   // 1秒間トランプの表を表示した後裏にturnする
+      } else {
+        this.reset();
+      }
+    },
 
     // reset: function (i) {
     //   const secondClickedTrump = this.trumps[i];
