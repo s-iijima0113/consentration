@@ -1,33 +1,25 @@
 <template>
-  <div class="consentration-box">
-    <div v-for="(trump, i) in trumps" v-bind:key="i">
-      <img
-        v-bind:src="
-          trump.isOpen || trump.isGet != null
-            ? trump.trumpInfo.front
-            : trump.trumpInfo.back
-        "
-        class="trumpShape"
-        @click="clickTrump(i)"
-      />
+  <div class="getTrumpCount">
+    あなたが取得した組数は〇〇組です
+    <div class="consentration-box">
+      <!-- <div class="getTrumps">あなたが取得したトランプは〇〇組です</div> -->
+      <div v-for="(trump, i) in trumps" v-bind:key="i">
+        <img
+          v-bind:src="
+            trump.isOpen || trump.isGet != null
+              ? trump.trumpInfo.front
+              : trump.trumpInfo.back
+          "
+          class="trumpShape"
+          @click="clickTrump(i)"
+        />
+      </div>
+      <!-- ①trumpsの配列を引っ張ってきている。 -->
+      <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
+      <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
+      <!-- ①trumpsの配列を引っ張ってきている。 -->
+      <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
     </div>
-    <!--div v-if="isActive === false"-->
-    <!--img class="trumpShape" src="@/assets/backcard/card_back.png"-->
-    <!--/div-->
-    <!--div v-else-->
-    <!--img class="trumpShape" src="@/assets/images/c01.gif"-->
-    <!--/div-->
-    <!-- ①trumpsの配列を引っ張ってきている。 -->
-    <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
-    <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
-    <!-- ①trumpsの配列を引っ張ってきている。 -->
-    <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
-    <!--<div v-if="trump.surface === true">-->
-    <!--<img :src="~assets/images/trumpImage">-->
-    <!--</div> -->
-    <!--<div v-else> -->
-    <!--<img src="~assets/backcard/card_back.png">-->
-    <!--</div>-->
   </div>
 </template>
 
@@ -129,11 +121,15 @@ export default {
 </script>
 
 <style>
+.getTrumpCount {
+  text-align: center;
+  margin-top: 5px;
+}
 .consentration-box {
   overflow: hidden;
   width: 1190px;
   background-color: green;
-  margin: 50px auto;
+  margin: 30px auto;
   padding: 10px;
 }
 .trumpShape {
