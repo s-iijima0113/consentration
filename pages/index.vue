@@ -1,8 +1,7 @@
 <template>
   <div class="getTrumpCount">
-    あなたが取得した組数は〇〇組です
+    あなたが取得した組数は{{ getPlayerPairs }}組です
     <div class="consentration-box">
-      <!-- <div class="getTrumps">あなたが取得したトランプは〇〇組です</div> -->
       <div v-for="(trump, i) in trumps" v-bind:key="i">
         <img
           v-bind:src="
@@ -53,9 +52,9 @@ export default {
         this.trumps.push(trump);
       }
     }
+    // 乱数を取得
     for (let h = this.trumps.length - 1; h >= 0; h--) {
       const m = Math.floor(Math.random() * (h + 1));
-      // 乱数を取得
       const tmp = this.trumps[h];
       this.trumps[h] = this.trumps[m];
       this.trumps[m] = tmp;
@@ -64,7 +63,16 @@ export default {
       trumps: this.trumps, // trumpsプロパティをもつ連想配列
     };
   },
-
+  computed: {
+    getPlayerPairs: function () {
+      if (!this.trumps || this.trumps.length == 0) return;
+      return (
+        this.trumps.filter((trump) => {
+          return trump.isGet === PLAYER;
+        }).length / 2
+      );
+    },
+  },
   methods: {
     clickTrump: function (i) {
       if (openedTrump >= 2) return;
@@ -124,6 +132,7 @@ export default {
 .getTrumpCount {
   text-align: center;
   margin-top: 5px;
+  font-size: 120%;
 }
 .consentration-box {
   overflow: hidden;
